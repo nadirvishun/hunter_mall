@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 视口信息一定要加，出现比例问题。。。。 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+
+	<title>查看业绩佣金页</title>
+</head>
+<body>
+<div>
+<div style="margin: 0;padding:0;">
+	<div style="display: inline-block;"><img style="border-radius: 10px;width: 40px;height: 40px;" src="{$data['avatar']}"></div>
+	<span style="position: relative;top:-7px;font-style: orange;"> &emsp;<font color="#EE7600">&lt;{$data['nickname']}&gt;</font> 的业绩</span><a href="javascript:;" class="open-popup" data-target="#popup" style="position: relative;top:-7px;right: -25px;">&emsp;&emsp;<i>查看详细记录</i></a>
+</div>
+
+<div><span>商品总返利：</span></div>
+<div style=" width:200px; height:200px; background-color:#F00; border-radius:100px;margin:0 auto ;box-shadow: 15px 15px 15px #000;">  
+         <span style="height:200px; line-height:200px; display:block; color:#FFF; text-align:center;font-size: 3em;"><strong>{$data['com_total']}</strong></span> 
+    </div> 
+    <div style="border-bottom: 1px solid gray; margin-top: 20px;margin-bottom: 3px;"></div>
+<div><span >团队总业绩:</span></div>
+    <div style=" width:200px; height:200px; background-color:#F00; border-radius:100px;margin:0 auto;box-shadow: 15px 15px 15px #000;">  
+         <span style="height:200px; line-height:200px; display:block; color:#FFF; text-align:center;font-size: 3em;"><strong>{$data['profit_total']}</strong></span>  
+    </div> 
+
+
+</div>
+
+
+<div id="popup" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    <div class="weui-flex">
+  <div class="weui-flex__item"><button class="close-popup weui-btn weui-btn_primary">返回</button></div>
+  <div class="weui-flex__item"></div>
+  <div class="weui-flex__item"></div>
+</div>
+    {if $info['msg']=='您没有相关记录！'}
+    {$info['msg']}
+    {else}
+    <div class="weui-cells">
+        {loop $info $index $item}
+        <div class="weui-cell">
+        <div class="weui-cell__bd">
+        <p>{$item['name']}</p>
+        </div>
+        <div class="weui-cell__ft">在{php echo date('Y-m-d H:m',$item['createtime']);}购买{$item['goodsname']} <br><font color="orange" size="">金额{$item['price']}</font> </div>
+        </div>
+        {/loop}
+    </div>
+    {/if}
+  </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+
+</body>
+</html>

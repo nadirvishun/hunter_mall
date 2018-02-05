@@ -1,0 +1,1 @@
+<?php if(!defined('IN_IA')) {exit('Access Denied');}if(!defined('hunter_mall_VERSION')) {define('hunter_mall_VERSION', '2.7.3');}if(!defined('hunter_mall_RELEASE')) {define('hunter_mall_RELEASE', '20161107');}

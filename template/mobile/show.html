@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 视口信息一定要加，出现比例问题。。。。 -->
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="../addons/hunter_mall/template/mobile/layui/css/layui.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+<style type="text/css">
+  html{
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    margin: 0;
+    padding: 0;
+  }
+</style>
+	<title>提成和业绩奖励</title>
+</head>
+<body>
+
+
+<div class="layui-container" style="margin: 0;padding: 0;">
+  <div class="layui-row layui-col-space1" style="background-color: red;">
+    <div class="layui-col-xs2">
+      <div style="height:5px ;"></div>
+      <img style="border-radius: 25px;width: 50px;height: 50px; margin: 5px;border:1px solid white;" src="{$data['avatar']}">
+      <div style="height: 5px;"></div>
+    </div>
+    <div class="layui-col-xs4">
+      <font color="white" size="2px;">{$data['nickname']}</font>
+      <br><font color="#EEEE00" size="2px;">&lt;普通等级&gt;</font> 
+      <br><font color="white" size="2px">推荐人：总店</font> 
+    </div>
+  </div>
+<div style="height:10px;"></div>
+  <div class="layui-row">
+    <div class="layui-col-xs5">
+      成功提现商品提成<br>
+      <font size="6em">{$data['profit_suc']}</font>
+    </div>
+    <div class="layui-col-xs2 layui-col-xs-offset5">
+      
+      <button class="layui-btn layui-btn-radius layui-bg-red layui-btn-sm open-popup"  data-target="#popup" style="width: 80%;">明细</button>
+    </div>
+  </div>
+  <div style="height:20px;"></div>
+  <div class="layui-row">
+    <div class="layui-col-xs5">
+      可提现商品提成<br>
+      <font size="4em" id="total_p">{$data['profit_total']}</font>&emsp;&emsp;<font size="3em" id='verify_p'>{$data['profit_withdraw']}</font><span class="layui-badge layui-bg-blue">审核中</span>
+    </div>
+    <div class="layui-col-xs2 layui-col-xs-offset5">
+      <div style="height: 5px;"></div>
+      <button class="layui-btn layui-btn-radius layui-bg-red layui-btn-sm" style="width: 80%;" onclick="withdraw_p()">申请兑换</button>
+    </div>
+  </div>
+  <div style="height: 20px;border-bottom: 2px solid gray;"></div>
+
+  <div style="height:10px;"></div>
+  <div class="layui-row">
+    <div class="layui-col-xs5">
+      成功提现团队业绩奖励<br>
+      <font size="6em">0.00</font>
+    </div>
+    <div class="layui-col-xs2 layui-col-xs-offset5">
+      
+      <button class="layui-btn layui-btn-radius layui-bg-red layui-btn-sm" style="width: 80%;">明细</button>
+    </div>
+  </div>
+  <div style="height:20px;"></div>
+  <div class="layui-row">
+    <div class="layui-col-xs5">
+      可提现团队业绩奖励<br>
+      <font size="4em">{$data['com_total']}</font>
+    </div>
+    <div class="layui-col-xs2 layui-col-xs-offset5">
+      <div style="height: 5px;"></div>
+      <button class="layui-btn layui-btn-radius layui-bg-red layui-btn-sm" style="width: 80%;" onclick="withdraw_c()">申请兑换</button>
+    </div>
+  </div>
+  <div style="height: 20px;border-bottom: 2px solid gray;"></div>
+  <blockquote class="layui-elem-quote" style="font-size: 1em;">备注：申请兑换后，可以将团队业绩和商品提成转为可提现佣金，需等待管理员后台审核。</blockquote>
+</div>
+
+
+<!-- <a href="javascript:;" class="open-popup" data-target="#popup"  style="position: relative;top:-7px;right: -25px;">&emsp;&emsp;<i>明细</i></a> -->
+
+
+<!-- <div>
+
+<div><span>商品总返利：</span></div>
+<div style=" width:200px; height:200px; background-color:#F00; border-radius:100px;margin:0 auto ;box-shadow: 15px 15px 15px #000;">  
+         <span style="height:200px; line-height:200px; display:block; color:#FFF; text-align:center;font-size: 3em;"><strong>{$data['com_total']}</strong></span> 
+    </div> 
+    <div style="border-bottom: 1px solid gray; margin-top: 20px;margin-bottom: 3px;"></div>
+<div><span >团队总业绩:</span></div>
+    <div style=" width:200px; height:200px; background-color:#F00; border-radius:100px;margin:0 auto;box-shadow: 15px 15px 15px #000;">  
+         <span style="height:200px; line-height:200px; display:block; color:#FFF; text-align:center;font-size: 3em;"><strong>{$data['profit_total']}</strong></span>  
+    </div> 
+
+
+</div> -->
+
+
+
+
+
+
+
+<div id="popup" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    <div class="weui-flex">
+  <div class="weui-flex__item"><button class="close-popup weui-btn weui-btn_primary">返回</button></div>
+  <div class="weui-flex__item"></div>
+  <div class="weui-flex__item"></div>
+</div>
+    {if $info['msg']=='您没有相关记录！'}
+    {$info['msg']}
+    {else}
+    <div class="weui-cells">
+        {loop $detail $index $item}
+        <div class="weui-cell">
+        <div class="weui-cell__bd">
+        <p>{$item['time']}</p>
+        </div>
+        <div class="weui-cell__ft">申请兑换{$item['num']} <br><font color="orange" size="">审核中</font> </div>
+        </div>
+        {/loop}
+    </div>
+    {/if}
+  </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="../addons/hunter_mall/template/mobile/layui/layui.js">  </script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script type="text/javascript">
+  function withdraw_p() {
+    $.prompt({
+  title: '提现',
+  text: '输入提现金额',
+  input: '最小可提现金额1元',
+  empty: false, // 是否允许为空
+  onOK: function (input) {
+    input=parseInt(input)
+   var before=parseInt($('#verify_p').html())
+   var before2=parseFloat($("#total_p").html())
+   $('#total_p').html(before2-input)
+    $("#verify_p").html(input+before)
+    $.post(window.location.href,{num:input,type:1},function (result) {
+      
+    })
+  },
+  onCancel: function () {
+    return 
+  }
+  });
+}
+  
+
+
+</script>
+</body>
+</html>

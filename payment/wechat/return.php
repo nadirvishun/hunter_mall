@@ -1,0 +1,43 @@
+<?php
+require '../../../../framework/bootstrap.inc.php';
+require '../../../../addons/hunter_mall/defines.php';
+require '../../../../addons/hunter_mall/core/inc/functions.php';
+$ordersn = $_GET['outtradeno'];
+$attachs = explode(':', $_GET['attach']);
+if (empty($attachs) || !is_array($attachs)) 
+{
+	exit();
+}
+$uniacid = $attachs[0];
+$paytype = $attachs[1];
+$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile';
+if (!empty($ordersn)) 
+{
+	if ($paytype == 0) 
+	{
+		$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile&r=order.pay.complete&ordersn=' . $ordersn . '&type=wechat';
+	}
+	else if ($paytype == 1) 
+	{
+		$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile&r=member.recharge.wechat_complete&logno=' . $ordersn;
+	}
+	else if ($paytype == 2) 
+	{
+	}
+	else if ($paytype == 3) 
+	{
+		$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile&r=creditshop.log&logno=' . $ordersn;
+	}
+	else if ($paytype == 4) 
+	{
+		$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile&r=sale.coupon.my';
+	}
+	else if ($paytype == 5) 
+	{
+		$url = $_W['siteroot'] . '../../app/index.php?i=' . $uniacid . '&c=entry&m=hunter_mall&do=mobile&r=groups.pay.complete&ordersn=' . $ordersn . '&type=wechat';
+	}
+}
+//立即重定向到url
+header('location: ' . $url);
+exit();
+?>
