@@ -20,7 +20,7 @@ class hunter_mallModuleSite extends WeModuleSite
 
 	public function doWebWeb()
 	{
-		m('route')->run();
+		m('route')->run();  
 	}
 	public function doWebDetail()
 	{
@@ -50,7 +50,7 @@ class hunter_mallModuleSite extends WeModuleSite
 		$result='<ul>';
 
 		foreach ($info as $key => $value) {
-			$result.="<li><font color='orange' >".$value['name'].'</font>在'.date('Y-m-d H:m',$value['createtime']).'购买'.$value['goodsname'].'金额'.$value['price'].'</li>';
+			$result.="<li><font color='orange' >".$value['name'].'</font>�?.date('Y-m-d H:m',$value['createtime']).'购买'.$value['goodsname'].'金额'.$value['price'].'</li>';
 		}
 		$result.='</ul>';
 		return $result;
@@ -105,8 +105,7 @@ class hunter_mallModuleSite extends WeModuleSite
 		if($level_merch==5){
 
 
-			//创造合伙人业绩的详细记录，每笔下线的购买情况
-			// $detail=pdo_fetchall('select * from '.tablename('ewei_shop_commission_log_stat').' where partnerid=:partnerid and uniacid=:uni',array(':partnerid'=>$data['id'],':uni'=>$_W['uniacid']));
+			//创造合伙人业绩的详细记录，每笔下线的购买情�?			// $detail=pdo_fetchall('select * from '.tablename('ewei_shop_commission_log_stat').' where partnerid=:partnerid and uniacid=:uni',array(':partnerid'=>$data['id'],':uni'=>$_W['uniacid']));
 			// foreach ($detail as $key => $value) {
 			// 	$info[$key]['name']=pdo_fetchcolumn('select nickname from '.tablename('ewei_shop_member').' where uniacid=:uni and openid=:id limit 1',array(':uni'=>$_W['uniacid'],':id'=>$value['openid']));
 			// 	$info[$key]['goodsname']=pdo_fetchcolumn('select title from '.tablename('ewei_shop_goods').' where uniacid=:uni and id=:id limit 1',array(':uni'=>$_W['uniacid'],':id'=>$value['goodsid']));
