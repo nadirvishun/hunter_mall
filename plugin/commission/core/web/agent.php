@@ -149,7 +149,7 @@ class Agent_EweiShopV2Page extends PluginWebPage
 		}
 		$pager = pagination($total, $pindex, $psize);
 		load()->func('tpl');
-		
+		//修改
 		include $this->template();
 	}
 	public function delete() 
